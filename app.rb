@@ -34,7 +34,7 @@ class BookmarkManager < Sinatra::Base
       Bookmark.delete(params[:title])
       redirect('/')
     else
-      flash[:error_delete] = "This title does not exist"
+      flash[:error_delete] = "Invalid title"
       redirect('/delete')
     end
   end
@@ -44,8 +44,13 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/update' do
-    Bookmark.update(params[:original_title], params[:new_title])
-    redirect('/')
+    if Bookmark.all.any? { |h| h[:title] == params[:original_title] }
+      Bookmark.update(params[:original_title], params[:new_title])
+      redirect('/')
+    else
+      flash[:error_update] = "Invalid title"
+      redirect('/update')
+    end
   end
 
   run! if app_file == $0

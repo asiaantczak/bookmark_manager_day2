@@ -55,6 +55,15 @@ feature 'update bookmark' do
     expect(page).not_to have_content 'youtube'
     expect(page).to have_content 'Video channel'
   end
+
+  scenario 'updating non-existent bookmark gives error' do
+    visit('/')
+    click_button 'Update bookmark'
+    fill_in 'original_title', with: 'youtube'
+    fill_in 'new_title', with: 'Video channel'
+    click_button 'Update'
+    expect(page).to have_content 'Invalid title'
+  end
 end
 
 end
