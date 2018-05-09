@@ -22,7 +22,7 @@ feature 'valdidate input' do
     click_button 'Add bookmark'
     fill_in 'bookmark', with: 'youtube.dom'
     click_button 'Add'
-    expect(page).to have_content 'invalid url'
+    expect(page).to have_content 'Invalid url'
   end
 end
 

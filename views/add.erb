@@ -1,4 +1,6 @@
-<form action="/add-bookmark" method="post">
+<form action="/add" method="post">
   <input type="text" name="bookmark">
   <input type="submit" value="Add">
 </form>
+
+<%= flash[:error] %>
