@@ -10,11 +10,15 @@ describe Bookmark, :bookmark do
     end
   end
 
-  describe '#add' do
+  describe '#add', :add do
     it 'adds a new bookmark' do
       described_class.add('http://youtube.com')
       expect(described_class.all).to eq ['http://youtube.com']
     end
+    it 'raises error if url is invalid' do
+      expect { described_class.add('youtube.dom') }.to raise_error 'invalid url'
+    end
+
   end
 
 end

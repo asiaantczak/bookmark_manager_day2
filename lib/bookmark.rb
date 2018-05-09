@@ -1,4 +1,5 @@
 require 'pg'
+require 'uri'
 
 class Bookmark
 
@@ -14,6 +15,7 @@ class Bookmark
   end
 
   def self.add(website)
+    fail 'invalid url' unless website =~ /\A#{URI::regexp(['http', 'https'])}\z/
     set_database.exec "INSERT INTO bookmarks (url) VALUES('#{website}');"
   end
 
