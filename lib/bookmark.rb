@@ -25,6 +25,11 @@ class Bookmark
     set_database.exec "INSERT INTO bookmarks (url, title) VALUES('#{website}', '#{title}');"
   end
 
+  def self.delete(title)
+    fail 'This title does not exist' unless self.all.any? { |h| h[:title] == title }
+    set_database.exec "DELETE FROM bookmarks WHERE title='#{title}';"
+  end
+
   private
 
   def self.set_database

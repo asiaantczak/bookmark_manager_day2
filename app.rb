@@ -25,6 +25,20 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
+  get '/delete' do
+    erb(:delete)
+  end
+
+  post '/delete' do
+    if Bookmark.all.any? { |h| h[:title] == params[:title] }
+      Bookmark.delete(params[:title])
+      redirect('/')
+    else
+      flash[:error_delete] = "This title does not exist"
+      redirect('/delete')
+    end
+  end
+
   run! if app_file == $0
 
 end

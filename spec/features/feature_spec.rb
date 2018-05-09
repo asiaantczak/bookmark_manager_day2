@@ -27,4 +27,17 @@ feature 'valdidate input' do
   end
 end
 
+feature 'delete bookmark' do
+  scenario 'deletes bookmark' do
+    visit('/')
+    click_button 'Add bookmark'
+    fill_in 'bookmark', with: 'http://youtube.com'
+    fill_in 'title', with: 'youtube'
+    click_button 'Add'
+    click_button 'Delete bookmark'
+    fill_in 'title', with: 'youtube'
+    click_button 'Delete'
+  end
+end
+
 end

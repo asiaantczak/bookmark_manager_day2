@@ -31,7 +31,17 @@ describe Bookmark, :bookmark do
     it 'raises error if url is invalid' do
       expect { described_class.add('youtube.dom', 'youtube') }.to raise_error 'invalid url'
     end
+  end
 
+  describe '#delete', :delete do
+    it 'deletes bookmark' do
+      described_class.add('http://youtube.com', 'youtube')
+      described_class.delete('youtube')
+      expect(described_class.all).to eq []
+    end
+    it 'raises error if title does not exist' do
+      expect { described_class.delete('youtube') }.to raise_error 'This title does not exist'
+    end
   end
 
 end
