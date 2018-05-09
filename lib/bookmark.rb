@@ -30,6 +30,10 @@ class Bookmark
     set_database.exec "DELETE FROM bookmarks WHERE title='#{title}';"
   end
 
+  def self.update(current_title, new_title)
+    set_database.exec "UPDATE bookmarks SET title = '#{new_title}' WHERE title = '#{current_title}'"
+  end
+
   private
 
   def self.set_database

@@ -2,6 +2,8 @@ require 'bookmark'
 
 describe Bookmark, :bookmark do
   let(:bookmark) { Bookmark.new('http://makersacademy.com', 'Makers Academy') }
+  let(:title1) { 'youtube' }
+  let(:title2) { 'Video platform' }
 
   describe '#url', :url do
     it 'returns the bookmark url' do
@@ -41,6 +43,14 @@ describe Bookmark, :bookmark do
     end
     it 'raises error if title does not exist' do
       expect { described_class.delete('youtube') }.to raise_error 'This title does not exist'
+    end
+  end
+
+  describe '#update', :update do
+    it 'updates a bookmark' do
+      described_class.add('http://youtube.com', 'youtube')
+      described_class.update(title1, title2)
+      expect(described_class.all).to eq [ {url: 'http://youtube.com', title: 'Video platform'} ]
     end
   end
 

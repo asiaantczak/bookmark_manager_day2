@@ -37,6 +37,23 @@ feature 'delete bookmark' do
     click_button 'Delete bookmark'
     fill_in 'title', with: 'youtube'
     click_button 'Delete'
+    expect(page).not_to have_content 'youtube'
+  end
+end
+
+feature 'update bookmark' do
+  scenario 'updates bookmark' do
+    visit('/')
+    click_button 'Add bookmark'
+    fill_in 'bookmark', with: 'http://youtube.com'
+    fill_in 'title', with: 'youtube'
+    click_button 'Add'
+    click_button 'Update bookmark'
+    fill_in 'original_title', with: 'youtube'
+    fill_in 'new_title', with: 'Video channel'
+    click_button 'Update'
+    expect(page).not_to have_content 'youtube'
+    expect(page).to have_content 'Video channel'
   end
 end
 
