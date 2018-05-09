@@ -1,9 +1,9 @@
-feature 'view links' do
-  scenario 'shows links on the homepage' do
+feature 'view titles', :title do
+  scenario 'shows title on the homepage' do
     con = PG.connect :dbname => 'bookmark_manager_test'
-    con.exec "INSERT INTO bookmarks (url) VALUES('http://makersacademy.com');"
+    con.exec "INSERT INTO bookmarks (url, title) VALUES('http://makersacademy.com', 'Makers Academy');"
     visit('/')
-    expect(page).to have_content 'http://makersacademy.com'
+    expect(page).to have_content 'Makers Academy'
   end
 end
 
@@ -12,8 +12,9 @@ feature 'add bookmarks' do
     visit('/')
     click_button 'Add bookmark'
     fill_in 'bookmark', with: 'http://youtube.com'
+    fill_in 'title', with: 'youtube'
     click_button 'Add'
-    expect(page).to have_content 'http://youtube.com'
+    expect(page).to have_content 'youtube'
   end
 
 feature 'valdidate input' do

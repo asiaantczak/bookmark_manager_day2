@@ -2,7 +2,7 @@
 <html>
 <body>
   <% @bookmarks.each do |bookmark| %>
-  <p><%= bookmark %></p>
+  <p><%= bookmark[:title] %></p>
   <% end %>
 
   <form action="/add" method="get">
