@@ -6,3 +6,12 @@ feature 'view links' do
     expect(page).to have_content 'http://makersacademy.com'
   end
 end
+
+feature 'add bookmarks' do
+  scenario 'shows added bookmark' do
+    visit('/')
+    fill_in 'bookmark', with: 'http://youtube.com'
+    click_button 'Add bookmark'
+    expect(page).to have_content 'http://youtube.com'
+  end
+end

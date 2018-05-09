@@ -8,6 +8,11 @@ class BookmarkManager < Sinatra::Base
     erb(:index)
   end
 
+  post '/add' do
+    Bookmark.add(params[:bookmark])
+    redirect('/')
+  end
+
   run! if app_file == $0
 
 end

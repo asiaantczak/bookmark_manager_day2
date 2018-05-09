@@ -4,5 +4,10 @@
   <% @bookmarks.each do |bookmark| %>
   <p><%= bookmark %></p>
   <% end %>
+
+  <form action="/add" method="post">
+    <input type="text" name="bookmark">
+    <input type="submit" value="Add bookmark">
+  </form>
 </body>
 </html>
