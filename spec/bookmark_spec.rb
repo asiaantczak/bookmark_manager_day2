@@ -31,7 +31,7 @@ describe Bookmark, :bookmark do
       expect(described_class.all).to eq [{ url: 'http://youtube.com', title: 'youtube' }]
     end
     it 'raises error if url is invalid' do
-      expect { described_class.add('youtube.dom', 'youtube') }.to raise_error 'invalid url'
+      expect { described_class.add('youtube.dom', 'youtube') }.to raise_error 'Invalid url'
     end
   end
 
@@ -42,7 +42,7 @@ describe Bookmark, :bookmark do
       expect(described_class.all).to eq []
     end
     it 'raises error if title does not exist' do
-      expect { described_class.delete('youtube') }.to raise_error 'This title does not exist'
+      expect { described_class.delete('youtube') }.to raise_error 'Invalid title'
     end
   end
 
@@ -51,6 +51,10 @@ describe Bookmark, :bookmark do
       described_class.add('http://youtube.com', 'youtube')
       described_class.update(title1, title2)
       expect(described_class.all).to eq [ {url: 'http://youtube.com', title: 'Video platform'} ]
+    end
+
+    it 'raises error if title does not exist' do
+      expect { described_class.update(title1, title2) }.to raise_error 'Invalid title'
     end
   end
 

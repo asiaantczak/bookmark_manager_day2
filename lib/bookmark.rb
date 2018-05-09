@@ -21,16 +21,17 @@ class Bookmark
   end
 
   def self.add(website, title)
-    fail 'invalid url' unless website =~ /\A#{URI::regexp(['http', 'https'])}\z/
+    fail 'Invalid url' unless website =~ /\A#{URI::regexp(['http', 'https'])}\z/
     set_database.exec "INSERT INTO bookmarks (url, title) VALUES('#{website}', '#{title}');"
   end
 
   def self.delete(title)
-    fail 'This title does not exist' unless self.all.any? { |h| h[:title] == title }
+    fail 'Invalid title' unless self.all.any? { |h| h[:title] == title }
     set_database.exec "DELETE FROM bookmarks WHERE title='#{title}';"
   end
 
   def self.update(current_title, new_title)
+    fail 'Invalid title' unless self.all.any? { |h| h[:title] == current_title }
     set_database.exec "UPDATE bookmarks SET title = '#{new_title}' WHERE title = '#{current_title}'"
   end
 
